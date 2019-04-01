@@ -6,12 +6,37 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        // CommonMark mode (default: true)
+        commonmark: true,
+        // Footnotes mode (default: true)
+        footnotes: true,
+        // Pedantic mode (default: true)
+        pedantic: true,
+        // GitHub Flavored Markdown mode (default: true)
+        gfm: true,
+        // Plugins configs
+        plugins: [],
+      },
+    },
+    
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `sk5eou6zfiac`,
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        accessToken: `793a201a30b3b702773eaab1cfd860fce51acf71fcca80312405731428516832`,
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
