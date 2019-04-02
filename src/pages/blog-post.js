@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Bounce from 'react-reveal/Bounce';
 import Fade from 'react-reveal/Fade';
 import { Slide } from 'react-slideshow-image';
+import './blog-post.css'
 const properties = {
   duration: 5000,
   transitionDuration: 500,
@@ -19,43 +20,29 @@ class BlogPost extends Component {
       console.log(title.edges)
       content=title.edges.map((item,index) => {
       console.log(item.node.body.body)
-      slideImages.push(item.node.heroImage.resize.src);
     return(
-      <Fade>
-      <div className="content" key={index}> 
-            <h3>{item.node.title}</h3>
-            
-            </div>
-         </Fade>  
+      <div className="each-slide">
+        <div style={{'backgroundImage': `url(${item.node.heroImage.resize.src})`}}>
+        </div>
+      </div>
+    
     );
       })
         return (
+          <Fade>
             <div className="bodydata"
-           
             >
              <Slide {...properties}>
-        <div className="each-slide">
-          <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
-            <span>Slide 1</span>
-          </div>
-        </div>
-        <div className="each-slide">
-          <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
-            <span>Slide 2</span>
-          </div>
-        </div>
-        <div className="each-slide">
-          <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
-            <span>Slide 3</span>
-          </div>
-        </div>
-      </Slide>
+             {content}
+             </Slide> 
               <div
             dangerouslySetInnerHTML={{
               __html: this.props.data.contentfulBlogPostBodyTextNode.childMarkdownRemark.html,
             }}
           />
             </div>
+            </Fade>
+            
         );
     }
 }
